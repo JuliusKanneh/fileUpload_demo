@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid text-center">
+        <div>
+            <h1>Documents Management</h1>
+        </div>
+
+        <div class="text-success">
+            <h3>[[${message}]]</h3>
+        </div>
+
+        <div>
+            <h2>Recently Uploaded Documents</h2>
+        </div>
+
+        <div class="row border rounded m-3 p-3">
+            <th:block th:each="document : ${documents}">
+                <div class="col">
+                    <div>
+                        <img th:src="@{/icons/doc.png}" width="50px"/>
+                    </div>
+                    <div>
+                        <a th:href="@{'/download?id=' + ${document.id}}">[[${document.name}]]</a>
+                    </div>
+                    <div>
+                        ([[${#numbers.formatInteger(document.size, 4, 'COMMA')}]] bytes)
+                    </div>
+                </div>
+            </th:block>
+        </div>
+
+        <form th:action="@{/upload}" method="post" enctype="multipart/form-data" style="max-width: 600px; margin: 0 auto">
+        <div class="border rounded m-3">
+            <h2>Upload your Files:</h2>
+            <p>
+                <input type="file" name="document" required>
+            </p>
+            <p>
+                <input type="submit" value="Upload" class="btn btn-primary">
+            </p>
+        </div>
+        </form>
+    </div>
+
+</body>
+</html>
