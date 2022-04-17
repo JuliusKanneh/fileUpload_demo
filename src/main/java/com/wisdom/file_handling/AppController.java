@@ -23,7 +23,7 @@ public class AppController {
     @Autowired
     private DocumentService documentService;
 
-    @GetMapping("/")
+    @GetMapping(value = {"/", "/home"})
     public String home(Model model){
         List<Document> documents = documentService.getAll();
         model.addAttribute("documents", documents);
@@ -76,5 +76,10 @@ public class AppController {
 
         outputStream.write(document.getContent());
         outputStream.close();
+    }
+
+    @GetMapping("/test")
+    public String testPage(){
+        return "index";
     }
 }

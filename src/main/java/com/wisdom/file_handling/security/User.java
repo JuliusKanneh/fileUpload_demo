@@ -1,9 +1,12 @@
 package com.wisdom.file_handling.security;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class User {
@@ -12,14 +15,18 @@ public class User {
     private long id;
     private String username;
     private String password;
+    private String authorities;
+    private boolean active;
 
     public User() {
     }
 
-    public User(long id, String username, String password) {
+    public User(long id, String username, String password, String authorities, boolean active) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.authorities = authorities;
+        this.active = active;
     }
 
     public long getId() {
@@ -44,5 +51,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(String authorities) {
+        this.authorities = authorities;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
